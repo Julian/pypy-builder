@@ -1,0 +1,43 @@
+name: Build PyPy
+
+on:
+  repository_dispatch:
+  push:
+  release:
+    types: [published]
+  schedule:
+    # Daily at 4:32
+    - cron: '32 4 * * *'
+
+jobs:
+  pypy2:
+    runs-on: macos-latest
+
+    steps:
+    - name: Update homebrew
+      run: brew update
+    - name: Build PyPy
+      run: brew install --verbose --build-bottle pypy --HEAD
+    - name: Bottle PyPy
+      run: brew bottle pypy
+    - name: Upload the built PyPy
+      uses: actions/upload-artifact@master
+      with:
+        name: pypy
+        path: .
+
+  pypy3:
+    runs-on: macos-latest
+
+    steps:
+    - name: Update homebrew
+      run: brew update
+    - name: Build PyPy3
+      run: brew install --verbose --build-bottle pypy3 --HEAD
+    - name: Bottle PyPy3
+      run: brew bottle pypy3
+    - name: Upload the built PyPy
+      uses: actions/upload-artifact@master
+      with:
+        name: pypy3
+        path: .

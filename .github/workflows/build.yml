@@ -16,6 +16,8 @@ jobs:
     steps:
     - name: Update homebrew
       run: brew update
+    - name: Install mercurial
+      run: brew install mercurial
     - name: Build PyPy
       run: brew install --verbose --build-bottle pypy --HEAD
     - name: Bottle PyPy
@@ -32,6 +34,8 @@ jobs:
     steps:
     - name: Update homebrew
       run: brew update
+    - name: Install mercurial
+      run: brew install mercurial
     - name: Build PyPy3
       run: brew install --verbose --build-bottle pypy3 --HEAD
     - name: Bottle PyPy3
